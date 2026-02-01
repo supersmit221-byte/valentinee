@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Valentine 💖</title>
+
+  <style>
+    body {
+      background: #ffd6e0;
+      font-family: Arial, sans-serif;
+      text-align: center;
+      margin: 0;
+      padding-top: 30px;
+      overflow: hidden;
+    }
+
+    h1 {
+      color: #8b0000;
+      font-size: 2.2rem;
+      margin: 20px 0;
+    }
+
+    .gif-center {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 20px;
+    }
+
+    .buttons {
+      position: relative;
+      width: 300px;
+      height: 180px;
+      margin: 30px auto;
+    }
+
+    button {
+      font-size: 18px;
+      padding: 12px 22px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      position: absolute;
+    }
+
+    #yes {
+      background: #4caf50;
+      color: white;
+      left: 40px;
+      top: 80px;
+      transition: transform 0.2s ease;
+    }
+
+    #no {
+      background: #f44336;
+      color: white;
+      left: 170px;
+      top: 80px;
+    }
+
+    /* 🎉 Confetti */
+    .confetti {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      top: 0;
+      animation: fall 3s linear forwards;
+    }
+
+    @keyframes fall {
+      to {
+        transform: translateY(110vh) rotate(720deg);
+      }
+    }
+
+    /* 🌸 Flowers */
+    .flower {
+      position: fixed;
+      bottom: -40px;
+      font-size: 26px;
+      animation: floatUp 5s linear forwards;
+    }
+
+    @keyframes floatUp {
+      to {
+        transform: translateY(-120vh);
+        opacity: 0;
+      }
+    }
+
+    /* 💌 Messages */
+    #yayText {
+      display: none;
+      font-size: 1.8rem;
+      color: #a0003a;
+      margin-top: 20px;
+      font-weight: bold;
+    }
+
+    #loveMessage {
+      display: none;
+      font-size: 2.4rem;
+      color: #b00040;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    /* 🐱 After-YES GIFS ON BOTH SIDES */
+    #afterYesGifs {
+      display: none;
+    }
+
+    .side-left,
+    .side-right {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 260px;
+    }
+
+    .side-left {
+      left: 10px;
+    }
+
+    .side-right {
+      right: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- INITIAL GIF -->
+  <div class="gif-center" id="initialGif">
+    <div class="tenor-gif-embed"
+         data-postid="6744072373561608867"
+         data-share-method="host"
+         data-aspect-ratio="1.25714"
+         data-width="300px">
+      <a href="https://tenor.com/view/bear-flower-love-gif-6744072373561608867">
+        Bear Flower Sticker
+      </a>
+    </div>
+  </div>
+
+  <h1 id="question">Will you be my Valentine? 💖</h1>
+
+  <div class="buttons" id="buttons">
+    <button id="yes">Yes 💖</button>
+    <button id="no">No 💔</button>
+  </div>
+
+  <!-- AFTER YES -->
+  <div id="yayText">yeyeyeyeyeye</div>
+  <div id="loveMessage">I love you babygirl ❤️</div>
+
+  <div id="afterYesGifs">
+    <div class="side-left">
+      <div class="tenor-gif-embed"
+           data-postid="16448885156657771260"
+           data-share-method="host"
+           data-aspect-ratio="1"
+           data-width="100%">
+        <a href="https://tenor.com/view/silly-cat-dance-gif-16448885156657771260">
+          Silly Cat Dance Sticker
+        </a>
+      </div>
+    </div>
+
+    <div class="side-right">
+      <div class="tenor-gif-embed"
+           data-postid="10448418106835623316"
+           data-share-method="host"
+           data-aspect-ratio="0.561224"
+           data-width="100%">
+        <a href="https://tenor.com/view/small-dancing-white-cat-dance-funny-gif-10448418106835623316">
+          Small Dancing White Cat Sticker
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tenor script -->
+  <script async src="https://tenor.com/embed.js"></script>
+
+  <script>
+    const yesBtn = document.getElementById("yes");
+    const noBtn = document.getElementById("no");
+    const box = document.getElementById("buttons");
+    const question = document.getElementById("question");
+    const initialGif = document.getElementById("initialGif");
+
+    const yayText = document.getElementById("yayText");
+    const loveMessage = document.getElementById("loveMessage");
+    const afterYesGifs = document.getElementById("afterYesGifs");
+
+    /* YES grows */
+    let scale = 1;
+    setInterval(() => {
+      scale += 0.05;
+      yesBtn.style.transform = "scale(" + scale + ")";
+    }, 1000);
+
+    /* NO runs away */
+    function moveNo() {
+      const maxX = box.clientWidth - noBtn.offsetWidth;
+      const maxY = box.clientHeight - noBtn.offsetHeight;
+      noBtn.style.left = Math.random() * maxX + "px";
+      noBtn.style.top = Math.random() * maxY + "px";
+    }
+    noBtn.addEventListener("mouseenter", moveNo);
+
+    /* Confetti */
+    function confettiBurst() {
+      for (let i = 0; i < 70; i++) {
+        const c = document.createElement("div");
+        c.className = "confetti";
+        c.style.left = Math.random() * window.innerWidth + "px";
+        c.style.background =
+          ["#ff0a54", "#ff85a1", "#f9c74f"][Math.floor(Math.random() * 3)];
+        document.body.appendChild(c);
+        setTimeout(() => c.remove(), 3000);
+      }
+    }
+
+    /* Flowers */
+    function flowersUp() {
+      const flowers = ["🌸", "🌹", "🌺", "💐"];
+      for (let i = 0; i < 20; i++) {
+        const f = document.createElement("div");
+        f.className = "flower";
+        f.innerText = flowers[Math.floor(Math.random() * flowers.length)];
+        f.style.left = Math.random() * window.innerWidth + "px";
+        document.body.appendChild(f);
+        setTimeout(() => f.remove(), 5000);
+      }
+    }
+
+    /* YES click */
+    yesBtn.addEventListener("click", () => {
+      box.style.display = "none";
+      question.style.display = "none";
+      initialGif.style.display = "none";
+
+      yayText.style.display = "block";
+      loveMessage.style.display = "block";
+      afterYesGifs.style.display = "block";
+
+      confettiBurst();
+      flowersUp();
+    });
+  </script>
+
+</body>
+</html>
+
